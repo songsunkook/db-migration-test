@@ -16,26 +16,18 @@ MySQL 컨테이너와 레플리케이션을 자동으로 설정합니다.
 ```
 레플리케이션 상태를 확인합니다.
 
+### 레플리케이션 복구
+```bash
+./scripts/fix-replication.sh
+```
+레플리케이션 문제를 해결합니다.
+
 ### 환경 정리
 ```bash
 ./scripts/stop.sh
 ```
 모든 컨테이너를 중지합니다.
 
-## 📋 실행 순서
-
-```bash
-# 1. 환경 시작
-./scripts/start.sh
-
-# 2. 애플리케이션 실행
-./gradlew bootRun
-
-# 3. 브라우저에서 테스트
-# - Swagger UI: http://localhost:8080/swagger-ui.html
-# - Togglz 콘솔: http://localhost:8080/togglz-console
-```
-
 ## 📚 DB Migration 실습
 
-실제 무중단 스키마 변경은 [MIGRATION_GUIDE.md](../MIGRATION_GUIDE.md)를 참고하세요.
+실제 무중단 스키마 변경 단계는 [README.md](../README.md)의 "📚 실습 단계"를 참고하세요.
