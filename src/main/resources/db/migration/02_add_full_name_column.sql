@@ -18,7 +18,7 @@ ALTER TABLE users
 --   --port=3307 \
 --   --user=root \
 --   --password=0000 \
---   --database=moko \
+--   --database=test_db \
 --   --table=users \
 --   --alter="ADD COLUMN full_name VARCHAR(255) NULL AFTER last_name" \
 --   --execute
