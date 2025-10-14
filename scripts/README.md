@@ -8,25 +8,13 @@
 ```bash
 ./scripts/start.sh
 ```
-MySQL 컨테이너와 레플리케이션을 자동으로 설정합니다.
-
-### 상태 확인
-```bash
-./scripts/check.sh
-```
-레플리케이션 상태를 확인합니다.
-
-### 레플리케이션 복구
-```bash
-./scripts/fix-replication.sh
-```
-레플리케이션 문제를 해결합니다.
+MySQL 컨테이너를 시작합니다.
 
 ### 환경 정리
 ```bash
 ./scripts/stop.sh
 ```
-모든 컨테이너를 중지합니다.
+MySQL 컨테이너를 중지하고 삭제합니다.
 
 ## 📚 DB Migration 실습
 
