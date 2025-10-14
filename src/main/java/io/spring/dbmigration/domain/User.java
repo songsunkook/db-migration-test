@@ -33,6 +33,9 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "full_name")
+    private String fullName;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -43,6 +46,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.fullName = firstName + " " + lastName;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -54,6 +58,7 @@ public class User {
     public void updateName(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = firstName + " " + lastName;
         this.updatedAt = LocalDateTime.now();
     }
 }
