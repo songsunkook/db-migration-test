@@ -2,9 +2,10 @@
 -- 이 DDL은 MySQL 8.0에서 INSTANT 알고리즘을 사용하여 Online으로 실행됩니다.
 
 -- Online DDL 확인 및 실행
-ALTER TABLE users 
-ADD COLUMN full_name VARCHAR(255) NULL AFTER last_name,
-ALGORITHM=INSTANT, LOCK=NONE;
+ALTER TABLE users
+    ADD COLUMN full_name VARCHAR(255) NULL AFTER last_name,
+    ALGORITHM = INPLACE,
+    LOCK = NONE;
 
 -- 만약 INSTANT가 지원되지 않는 경우 INPLACE로 fallback
 -- ALTER TABLE users 
