@@ -11,11 +11,12 @@
 - 스키마 변경과 애플리케이션 배포 시점의 불일치
 - 대용량 테이블의 무중단 스키마 변경
 
-## 🏗️ 기술 스택
+## 🏗️ 실습 환경
 
 - **Backend**: Spring Boot 3.x + JPA
 - **Database**: MySQL 8.0 (Master + Replica)
 - **Feature Flag**: Togglz
+- **Required**: Docker
 
 ## 🚀 Quick Start
 
@@ -30,14 +31,14 @@
 
 ### 2. 웹 인터페이스 접속
 - **Swagger UI**: http://localhost:8080/swagger-ui.html
-- **Feature Flag 관리**: http://localhost:8080/togglz-console
+- **Feature Flag 관리(4단계에서 사용)**: http://localhost:8080/togglz-console
 
 ### 3. API 테스트
 ```bash
 # 사용자 목록 조회
 curl http://localhost:8080/api/users
 
-# Feature Flag 상태 확인
+# Feature Flag 상태 확인(4단계에서 사용)
 curl http://localhost:8080/api/feature-flags
 ```
 
@@ -48,6 +49,25 @@ curl http://localhost:8080/api/feature-flags
 
 ### 목표
 `full_name` 컬럼으로 데이터 이전 후 기존 컬럼 제거
+
+## 🌿 브랜치별 실습
+
+각 단계별로 브랜치를 구성하여 점진적 배포 과정을 시뮬레이션합니다:
+
+```
+main (초기 상태)
+├── step1-expand (스키마 확장)
+├── step2-dual-write (Dual Write 구현)  
+├── step3-backfill (데이터 마이그레이션)
+├── step4-read-conversion (읽기 전환)
+├── step5-cleanup (코드 정리)
+└── step6-contract (스키마 축소)
+```
+
+### 실습 방법
+1. **각 단계별 브랜치 체크아웃**하여 해당 단계의 코드와 변경사항 확인
+2. **`migration-notes/current-step.md`**에서 현재 단계 상태 및 수행 작업 확인
+3. **미리 생성된 PR**을 통해 단계별 변경사항과 실제 배포 과정 검토
 
 ## 📚 실습 단계
 
