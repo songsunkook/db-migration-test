@@ -14,7 +14,7 @@
 ## 🏗️ 실습 환경
 
 - **Backend**: Spring Boot 3.x + JPA
-- **Database**: MySQL 8.0 (Master + Replica)
+- **Database**: MySQL 8.0
 - **Feature Flag**: Togglz
 - **Required**: Docker
 
@@ -22,7 +22,7 @@
 
 ### 1. 환경 시작
 ```bash
-# MySQL 환경 시작 (레플리케이션 포함)
+# MySQL 환경 시작
 ./scripts/start.sh
 
 # 애플리케이션 실행
@@ -31,14 +31,14 @@
 
 ### 2. 웹 인터페이스 접속
 - **Swagger UI**: http://localhost:8080/swagger-ui.html
-- **Feature Flag 관리(4단계에서 사용)**: http://localhost:8080/togglz-console
+- **Feature Flag 관리**: http://localhost:8080/togglz-console (4단계부터 사용)
 
 ### 3. API 테스트
 ```bash
 # 사용자 목록 조회
 curl http://localhost:8080/api/users
 
-# Feature Flag 상태 확인(4단계에서 사용)
+# Feature Flag 상태 확인 (4단계부터 사용)
 curl http://localhost:8080/api/feature-flags
 ```
 
@@ -76,7 +76,7 @@ main (초기 상태)
 **테이블 구조 확인**
 ```sql
 -- MySQL 접속
-mysql -h localhost -P 3306 -u root -p0000 moko
+mysql -h localhost -P 3306 -u root -p0000 test_db
 
 -- 테이블 구조 확인 (기존 스키마)
 DESCRIBE users;
