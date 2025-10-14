@@ -36,8 +36,8 @@
 
 ### 1. 환경 실행
 ```bash
-# MySQL 환경 시작
-docker-compose up -d
+# MySQL 환경 시작 (레플리케이션 포함)
+./scripts/start.sh
 
 # 애플리케이션 실행  
 ./gradlew bootRun
@@ -160,21 +160,32 @@ gh-ost \
 ## 📁 프로젝트 구조
 
 ```
-src/main/java/io/spring/dbmigration/
-├── config/
-│   ├── DatabaseConfig.java        # Master/Replica 데이터소스 설정
-│   └── FeatureFlagConfig.java     # Feature Flag 설정
-├── controller/
-│   ├── UserController.java        # 사용자 API
-│   └── FeatureFlagController.java # Feature Flag 관리 API
-├── service/
-│   ├── UserService.java          # 사용자 비즈니스 로직
-│   ├── UserReadService.java      # 읽기 전용 서비스 (Replica)
-│   └── FeatureFlagService.java   # Feature Flag 로직
-├── domain/
-│   └── User.java                 # 사용자 엔티티
-└── repository/
-    └── UserRepository.java       # JPA Repository
+├── scripts/                      # 실행 스크립트
+│   ├── start-db.sh               # MySQL 컨테이너 시작
+│   ├── stop-db.sh                # MySQL 컨테이너 중지
+│   ├── setup-replication.sh      # Master-Replica 레플리케이션 설정
+│   ├── check-replication.sh      # 레플리케이션 상태 확인
+│   └── run_migration.sh          # DB 마이그레이션 실행
+├── docker/mysql/                 # MySQL 설정 파일
+│   ├── master.cnf                # Master 설정
+│   ├── replica.cnf               # Replica 설정
+│   ├── init-master.sql           # Master 초기화 스크립트
+│   └── init-replica.sql          # Replica 초기화 스크립트
+└── src/main/java/io/spring/dbmigration/
+    ├── config/
+    │   ├── DatabaseConfig.java        # Master/Replica 데이터소스 설정
+    │   └── FeatureFlags.java          # Feature Flag 정의
+    ├── controller/
+    │   ├── UserController.java        # 사용자 API
+    │   └── FeatureFlagController.java # Feature Flag 관리 API
+    ├── service/
+    │   ├── UserService.java          # 사용자 비즈니스 로직
+    │   ├── UserReadService.java      # 읽기 전용 서비스 (Replica)
+    │   └── FeatureFlagService.java   # Feature Flag 로직
+    ├── domain/
+    │   └── User.java                 # 사용자 엔티티
+    └── repository/
+        └── UserRepository.java       # JPA Repository
 ```
 
 ## 🔍 모니터링 포인트
@@ -213,6 +224,7 @@ time curl "http://localhost:8080/api/users?fromMaster=false"
 1. **Expand**: 컬럼 추가 후 애플리케이션 정상 동작 확인
 2. **Dual Write**: 데이터 일관성 검증
 3. **Contract**: 기존 컬럼 제거 전 100% 마이그레이션 완료 확인
+
 
 ## 📚 참고 자료
 

@@ -1,0 +1,19 @@
+[mysqld]
+# Master 설정
+server-id = 1
+log-bin = mysql-bin
+binlog-format = ROW
+gtid-mode = ON
+enforce-gtid-consistency = ON
+
+# 성능 최적화
+innodb_buffer_pool_size = 256M
+innodb_log_file_size = 64M
+innodb_flush_log_at_trx_commit = 2
+
+# 문자셋 설정
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+
+# 타임존
+default-time-zone = '+09:00'
