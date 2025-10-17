@@ -1,17 +1,23 @@
 package io.spring.dbmigration.controller;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.spring.dbmigration.domain.User;
 import io.spring.dbmigration.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
+import lombok.RequiredArgsConstructor;
 
 @Tag(name = "사용자 API", description = "사용자 생성, 조회, 수정 기능을 제공하는 API")
 @RestController
@@ -46,11 +52,11 @@ public class UserController {
     @Operation(summary = "사용자 표시명 조회", 
                description = "1단계: 기존 스키마(firstName + lastName)로만 표시명을 조회합니다.")
     @GetMapping("/{id}/display-name")
-    public ResponseEntity<Map<String, String>> getDisplayName(
+    public ResponseEntity<Map<String, String>> getFullName(
             @Parameter(description = "사용자 ID", example = "1") @PathVariable Long id) {
         try {
-            String displayName = userService.getDisplayName(id);
-            return ResponseEntity.ok(Map.of("displayName", displayName));
+            String fullName = userService.getFullName(id);
+            return ResponseEntity.ok(Map.of("fullName", fullName));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }

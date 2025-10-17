@@ -2,6 +2,7 @@ package io.spring.dbmigration.domain;
 
 import java.time.LocalDateTime;
 
+import io.spring.dbmigration.config.FeatureFlags;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +13,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Entity
 @Table(name = "users")
 @Getter
@@ -52,7 +55,20 @@ public class User {
     }
 
     public String getFullName() {
-        return firstName + " " + lastName;
+        // Togglz가 현재 HTTP 요청의 사용자 컨텍스트에서 자동으로 판단
+        boolean useNewSchema = FeatureFlags.USE_NEW_SCHEMA.isActive();
+
+        if (useNewSchema && fullName != null) {
+            return fullName;
+        }
+        if (fullName == null) {
+            if (useNewSchema) {
+                // 이미 읽기 전환되었는데 신규 스키마가 null인 경우 로그 남기기
+                log.warn("Full name is null, falling back to firstName + lastName");
+            }
+            return firstName + " " + lastName;
+        }
+        return fullName;
     }
 
     public void updateName(String firstName, String lastName) {

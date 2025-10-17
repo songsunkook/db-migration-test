@@ -40,7 +40,7 @@ public class UserService {
         return userRepository.save(user);
     }
     
-    public String getDisplayName(Long userId) {
+    public String getFullName(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         
