@@ -78,8 +78,7 @@ class DbMigrationApplicationTests {
             [
                 {
                     "id": 1,
-                    "firstName": "홍",
-                    "lastName": "길동",
+                    "fullName": "홍길동",
                     "email": "hong@test.com"
                 }
             ]
