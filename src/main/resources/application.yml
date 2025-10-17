@@ -39,12 +39,3 @@ springdoc:
       display-name: 'DB Migration API'
       packages-to-scan: io.spring.dbmigration.controller
 
-# Togglz Configuration
-togglz:
-  console:
-    enabled: true
-    path: /togglz-console
-    secured: false
-  features:
-    USE_NEW_SCHEMA:
-      enabled: false # 기본값: 기존 스키마 사용

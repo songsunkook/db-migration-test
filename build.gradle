@@ -34,11 +34,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     
-    // Togglz for Feature Flags
-    implementation 'org.togglz:togglz-spring-boot-starter:4.4.0'
-    implementation 'org.togglz:togglz-console:4.4.0'
-    implementation 'org.togglz:togglz-core:4.4.0'
-    implementation 'org.togglz:togglz-servlet:4.4.0'
     
     runtimeOnly 'com.mysql:mysql-connector-j'
     

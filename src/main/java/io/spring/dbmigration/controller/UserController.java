@@ -27,10 +27,10 @@ public class UserController {
     
     private final UserService userService;
     
-    @Operation(summary = "사용자 생성", description = "새로운 사용자를 생성합니다. 1단계: 기존 스키마만 사용합니다.")
+    @Operation(summary = "사용자 생성", description = "새로운 사용자를 생성합니다. 5단계: 새로운 스키마만 사용합니다.")
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody CreateUserRequest request) {
-        User user = userService.createUser(request.firstName(), request.lastName(), request.email());
+        User user = userService.createUser(request.fullName(), request.email());
         return ResponseEntity.ok(user);
     }
     
@@ -50,7 +50,7 @@ public class UserController {
     }
     
     @Operation(summary = "사용자 표시명 조회", 
-               description = "1단계: 기존 스키마(firstName + lastName)로만 표시명을 조회합니다.")
+               description = "5단계: 새로운 스키마(fullName)로만 표시명을 조회합니다.")
     @GetMapping("/{id}/display-name")
     public ResponseEntity<Map<String, String>> getFullName(
             @Parameter(description = "사용자 ID", example = "1") @PathVariable Long id) {
@@ -63,15 +63,15 @@ public class UserController {
     }
     
     @Operation(summary = "사용자 이름 수정", 
-               description = "사용자의 이름을 수정합니다. 1단계: 기존 스키마만 업데이트합니다.")
+               description = "사용자의 이름을 수정합니다. 5단계: 새로운 스키마만 업데이트합니다.")
     @PutMapping("/{id}/name")
     public ResponseEntity<User> updateUserName(
             @Parameter(description = "사용자 ID", example = "1") @PathVariable Long id, 
             @RequestBody UpdateNameRequest request) {
-        User user = userService.updateUserName(id, request.firstName(), request.lastName());
+        User user = userService.updateUserName(id, request.fullName());
         return ResponseEntity.ok(user);
     }
     
-    public record CreateUserRequest(String firstName, String lastName, String email) {}
-    public record UpdateNameRequest(String firstName, String lastName) {}
+    public record CreateUserRequest(String fullName, String email) {}
+    public record UpdateNameRequest(String fullName) {}
 }
