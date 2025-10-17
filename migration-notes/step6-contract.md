@@ -49,7 +49,7 @@ DESCRIBE users;
 - ✅ **코드 정리 완료**: Feature Flag 및 기존 스키마 코드 제거
 - ✅ **단일 스키마 사용**: `fullName` 필드만 사용
 - ✅ **일관된 API**: 모든 API가 `fullName` 기반
-- 
+
 ### 최종 아키텍처
 - **단순한 스키마**: `users` 테이블에 `full_name` 컬럼만 존재
 - **깔끔한 코드**: 이전 스키마나 Feature Flag 관련 코드 없음
