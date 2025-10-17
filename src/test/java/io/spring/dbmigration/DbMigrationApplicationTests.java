@@ -42,8 +42,7 @@ class DbMigrationApplicationTests {
         // 사용자 생성
         String createUserJson = """
             {
-                "firstName": "홍",
-                "lastName": "길동",
+                "fullName": "홍길동",
                 "email": "hong@test.com"
             }
             """;
@@ -62,8 +61,7 @@ class DbMigrationApplicationTests {
         String expectedCreateJson = """
             {
                 "id": 1,
-                "firstName": "홍",
-                "lastName": "길동",
+                "fullName": "홍길동",
                 "email": "hong@test.com"
             }
             """;
@@ -98,8 +96,7 @@ class DbMigrationApplicationTests {
         String expectedUserJson = """
             {
                 "id": 1,
-                "firstName": "홍",
-                "lastName": "길동",
+                "fullName": "홍길동",
                 "email": "hong@test.com"
             }
             """;
@@ -114,7 +111,7 @@ class DbMigrationApplicationTests {
         assertThat(displayNameResponse.getStatusCode().is2xxSuccessful()).isTrue();
         String expectedDisplayNameJson = """
             {
-                "displayName": "홍 길동"
+                "fullName": "홍길동"
             }
             """;
         JSONAssert.assertEquals(expectedDisplayNameJson, displayNameResponse.getBody(), JSONCompareMode.STRICT);

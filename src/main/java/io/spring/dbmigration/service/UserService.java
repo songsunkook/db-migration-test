@@ -18,8 +18,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public User createUser(String firstName, String lastName, String email) {
-        User user = new User(firstName, lastName, email);
+    public User createUser(String fullName, String email) {
+        User user = new User(fullName, email);
         return userRepository.save(user);
     }
     
@@ -32,11 +32,11 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUserName(Long id, String firstName, String lastName) {
+    public User updateUserName(Long id, String fullName) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         
-        user.updateName(firstName, lastName);
+        user.updateName(fullName);
         return userRepository.save(user);
     }
     
